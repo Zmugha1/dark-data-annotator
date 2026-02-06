@@ -489,6 +489,9 @@ def render_header():
             Transform unstructured documents into ML-ready structured data.
             <span style='color: #00d9c0;'>Step-by-step annotation pipeline.</span>
         </p>
+        <p style='color: #94a3b8; font-size: 14px; margin-top: 8px;'>
+            📖 <strong style='color: #00d9c0;'>How to use this app?</strong> Open <strong>How to use</strong> in the sidebar for a full feature guide.
+        </p>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
@@ -501,6 +504,8 @@ def render_header():
 
 def render_sidebar():
     with st.sidebar:
+        st.markdown("📖 **How to use:** Open **How to use** (in the sidebar above) to see how each feature works.")
+        st.markdown("---")
         st.markdown("### 📊 Pipeline Configuration")
         data_type = st.selectbox(
             "Data Type",
