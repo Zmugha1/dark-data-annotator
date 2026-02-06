@@ -20,25 +20,27 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ==================== CUSTOM CSS ====================
+# ==================== CUSTOM CSS (LIGHT THEME) ====================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
     
     .stApp {
-        background-color: #0f172a;
+        background-color: #f1f5f9;
         font-family: 'Inter', sans-serif;
     }
     
     h1, h2, h3 {
         font-family: 'Inter', sans-serif !important;
-        color: #f8fafc !important;
+        color: #0f172a !important;
     }
+    
+    p, span, div { color: #334155; }
     
     /* Pipeline step cards */
     .step-card {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 2px solid #334155;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid #cbd5e1;
         border-radius: 12px;
         padding: 20px;
         margin: 10px 0;
@@ -46,81 +48,58 @@ st.markdown("""
     }
     
     .step-card.active {
-        border-color: #00d9c0;
-        box-shadow: 0 0 20px rgba(0, 217, 192, 0.2);
+        border-color: #0d9488;
+        box-shadow: 0 0 20px rgba(13, 148, 136, 0.2);
     }
     
     .step-card.completed {
         border-color: #22c55e;
-        opacity: 0.8;
+        opacity: 0.9;
     }
     
     /* Data display */
     .data-box {
-        background: #020617;
-        border: 1px solid #1e293b;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
         padding: 16px;
         font-family: 'JetBrains Mono', monospace;
         font-size: 12px;
         overflow-x: auto;
-        color: #94a3b8;
+        color: #475569;
     }
     
-    .highlight {
-        color: #00d9c0;
-        font-weight: 600;
-    }
-    
-    .warning {
-        color: #fbbf24;
-    }
-    
-    .error {
-        color: #ef4444;
-    }
-    
-    .success {
-        color: #22c55e;
-    }
+    .highlight { color: #0d9488; font-weight: 600; }
+    .warning { color: #d97706; }
+    .error { color: #dc2626; }
+    .success { color: #16a34a; }
     
     /* Metrics */
     .metric-card {
-        background: #1e293b;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
         padding: 16px;
         text-align: center;
     }
     
-    .metric-value {
-        font-size: 32px;
-        font-weight: 700;
-        color: #00d9c0;
-    }
-    
-    .metric-label {
-        font-size: 12px;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
+    .metric-value { font-size: 32px; font-weight: 700; color: #0d9488; }
+    .metric-label { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
     
     /* Comparison table */
     .comparison-row {
         display: flex;
         justify-content: space-between;
         padding: 12px;
-        border-bottom: 1px solid #334155;
+        border-bottom: 1px solid #e2e8f0;
     }
     
-    .comparison-row:last-child {
-        border-bottom: none;
-    }
+    .comparison-row:last-child { border-bottom: none; }
     
     /* Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #00d9c0 0%, #00b4a6 100%) !important;
-        color: #0f172a !important;
+        background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
+        color: #ffffff !important;
         font-weight: 600 !important;
         border-radius: 8px !important;
         padding: 12px 24px !important;
@@ -129,39 +108,37 @@ st.markdown("""
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 217, 192, 0.3);
+        box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
     }
     
     .stButton > button:disabled {
-        background: #334155 !important;
-        color: #64748b !important;
+        background: #94a3b8 !important;
+        color: #e2e8f0 !important;
         cursor: not-allowed;
     }
     
     /* Progress bar */
     .progress-container {
-        background: #1e293b;
+        background: #e2e8f0;
         border-radius: 8px;
         height: 8px;
         overflow: hidden;
     }
     
     .progress-fill {
-        background: linear-gradient(90deg, #00d9c0 0%, #00b4a6 100%);
+        background: linear-gradient(90deg, #0d9488 0%, #0f766e 100%);
         height: 100%;
         transition: width 0.5s ease;
     }
     
-    /* Code blocks */
     code {
         font-family: 'JetBrains Mono', monospace !important;
-        background: #020617 !important;
+        background: #e2e8f0 !important;
         padding: 2px 6px !important;
         border-radius: 4px !important;
-        color: #00d9c0 !important;
+        color: #0d9488 !important;
     }
     
-    /* Hide Streamlit branding */
     #MainMenu, footer, header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
@@ -485,18 +462,18 @@ def render_header():
     with col1:
         st.title("🏭 Dark Data Annotator")
         st.markdown("""
-        <p style='color: #94a3b8; font-size: 16px;'>
+        <p style='color: #475569; font-size: 16px;'>
             Transform unstructured documents into ML-ready structured data.
-            <span style='color: #00d9c0;'>Step-by-step annotation pipeline.</span>
-        </p>
-        <p style='color: #94a3b8; font-size: 14px; margin-top: 8px;'>
-            📖 <strong style='color: #00d9c0;'>How to use this app?</strong> Open <strong>How to use</strong> in the sidebar for a full feature guide.
+            <span style='color: #0d9488;'>Step-by-step annotation pipeline.</span>
         </p>
         """, unsafe_allow_html=True)
     with col2:
+        st.markdown("<div style='padding-top: 10px;'> </div>", unsafe_allow_html=True)
+        if st.button("📖 How to use this app", type="primary", use_container_width=True):
+            st.switch_page("pages/1_How_to_use.py")
         st.markdown("""
-        <div style='text-align: right; padding-top: 20px;'>
-            <span style='background: rgba(0, 217, 192, 0.1); color: #00d9c0;
+        <div style='text-align: right; padding-top: 12px;'>
+            <span style='background: #ccfbf1; color: #0d9488;
                          padding: 8px 16px; border-radius: 20px; font-size: 12px;
                          font-weight: 600;'>INTERNAL TOOL v1.0</span>
         </div>
@@ -504,7 +481,8 @@ def render_header():
 
 def render_sidebar():
     with st.sidebar:
-        st.markdown("📖 **How to use:** Open **How to use** (in the sidebar above) to see how each feature works.")
+        if st.button("📖 How to use this app", key="sidebar_howto", use_container_width=True):
+            st.switch_page("pages/1_How_to_use.py")
         st.markdown("---")
         st.markdown("### 📊 Pipeline Configuration")
         data_type = st.selectbox(
@@ -521,17 +499,17 @@ def render_sidebar():
         st.markdown("---")
         st.markdown("### 📈 Target KPIs")
         st.markdown("""
-        <div style='background: #1e293b; padding: 12px; border-radius: 8px; margin-bottom: 8px;'>
-            <div style='font-size: 11px; color: #94a3b8;'>PRECISION</div>
-            <div style='font-size: 18px; font-weight: 600; color: #00d9c0;'>+20%</div>
+        <div style='background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin-bottom: 8px;'>
+            <div style='font-size: 11px; color: #64748b;'>PRECISION</div>
+            <div style='font-size: 18px; font-weight: 600; color: #0d9488;'>+20%</div>
         </div>
-        <div style='background: #1e293b; padding: 12px; border-radius: 8px; margin-bottom: 8px;'>
-            <div style='font-size: 11px; color: #94a3b8;'>RECALL</div>
-            <div style='font-size: 18px; font-weight: 600; color: #00d9c0;'>+19%</div>
+        <div style='background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin-bottom: 8px;'>
+            <div style='font-size: 11px; color: #64748b;'>RECALL</div>
+            <div style='font-size: 18px; font-weight: 600; color: #0d9488;'>+19%</div>
         </div>
-        <div style='background: #1e293b; padding: 12px; border-radius: 8px;'>
-            <div style='font-size: 11px; color: #94a3b8;'>TOKEN EFFICIENCY</div>
-            <div style='font-size: 18px; font-weight: 600; color: #00d9c0;'>+15%</div>
+        <div style='background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px;'>
+            <div style='font-size: 11px; color: #64748b;'>TOKEN EFFICIENCY</div>
+            <div style='font-size: 18px; font-weight: 600; color: #0d9488;'>+15%</div>
         </div>
         """, unsafe_allow_html=True)
         return {
@@ -549,9 +527,9 @@ def render_step_card(step_num, title, description, status, data_preview=None):
     <div class='{card_class}'>
         <div style='display: flex; justify-content: space-between; align-items: center;'>
             <div>
-                <span style='color: #00d9c0; font-weight: 600; font-size: 14px;'>STEP {step_num}</span>
-                <h3 style='margin: 4px 0; color: #f8fafc;'>{indicator} {title}</h3>
-                <p style='color: #94a3b8; font-size: 14px; margin: 0;'>{description}</p>
+                <span style='color: #0d9488; font-weight: 600; font-size: 14px;'>STEP {step_num}</span>
+                <h3 style='margin: 4px 0; color: #0f172a;'>{indicator} {title}</h3>
+                <p style='color: #475569; font-size: 14px; margin: 0;'>{description}</p>
             </div>
         </div>
     </div>
@@ -565,38 +543,37 @@ def render_metrics_comparison(before_metrics, after_metrics):
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
-        <div style='background: #1e293b; border-radius: 12px; padding: 20px; border: 2px solid #ef4444;'>
-            <h4 style='color: #ef4444; margin-top: 0;'>❌ WITHOUT Flattening (Raw JSON)</h4>
+        <div style='background: #fef2f2; border-radius: 12px; padding: 20px; border: 2px solid #dc2626;'>
+            <h4 style='color: #dc2626; margin-top: 0;'>❌ WITHOUT Flattening (Raw JSON)</h4>
         """, unsafe_allow_html=True)
         for metric, value in before_metrics.items():
             if metric != "token_efficiency":
                 st.markdown(f"""
                 <div class='comparison-row'>
-                    <span style='color: #94a3b8; text-transform: uppercase; font-size: 12px;'>{metric.replace('_', ' ')}</span>
-                    <span style='color: #f8fafc; font-weight: 600;'>{value:.2%}</span>
+                    <span style='color: #64748b; text-transform: uppercase; font-size: 12px;'>{metric.replace('_', ' ')}</span>
+                    <span style='color: #0f172a; font-weight: 600;'>{value:.2%}</span>
                 </div>
                 """, unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div style='background: #1e293b; border-radius: 12px; padding: 20px; border: 2px solid #22c55e;'>
-            <h4 style='color: #22c55e; margin-top: 0;'>✅ WITH Flattening (Optimized)</h4>
+        <div style='background: #f0fdf4; border-radius: 12px; padding: 20px; border: 2px solid #16a34a;'>
+            <h4 style='color: #16a34a; margin-top: 0;'>✅ WITH Flattening (Optimized)</h4>
         """, unsafe_allow_html=True)
         for metric, value in after_metrics.items():
             if metric != "token_efficiency":
                 improvement = ((value - before_metrics.get(metric, 0)) / before_metrics.get(metric, 1)) * 100
                 st.markdown(f"""
                 <div class='comparison-row'>
-                    <span style='color: #94a3b8; text-transform: uppercase; font-size: 12px;'>{metric.replace('_', ' ')}</span>
-                    <span style='color: #00d9c0; font-weight: 600;'>{value:.2%} <span style='font-size: 11px;'>(+{improvement:.0f}%)</span></span>
+                    <span style='color: #64748b; text-transform: uppercase; font-size: 12px;'>{metric.replace('_', ' ')}</span>
+                    <span style='color: #0d9488; font-weight: 600;'>{value:.2%} <span style='font-size: 11px;'>(+{improvement:.0f}%)</span></span>
                 </div>
                 """, unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("""
-    <div style='background: linear-gradient(135deg, rgba(0, 217, 192, 0.1) 0%, rgba(0, 217, 192, 0.05) 100%);
-                border-radius: 12px; padding: 20px; margin-top: 20px; border: 1px solid rgba(0, 217, 192, 0.3);'>
-        <h4 style='color: #00d9c0; margin-top: 0;'>🎯 Key Insight: Token Efficiency</h4>
-        <p style='color: #94a3b8; margin-bottom: 16px;'>
+    <div style='background: #f0fdfa; border-radius: 12px; padding: 20px; margin-top: 20px; border: 1px solid #5eead4;'>
+        <h4 style='color: #0d9488; margin-top: 0;'>🎯 Key Insight: Token Efficiency</h4>
+        <p style='color: #475569; margin-bottom: 16px;'>
             Flattening JSON into natural language reduces token count by ~15%,
             improving both cost efficiency and model performance.
         </p>
@@ -659,7 +636,7 @@ def main():
     <div class='progress-container'>
         <div class='progress-fill' style='width: {progress * 100}%;'></div>
     </div>
-    <p style='text-align: center; color: #94a3b8; font-size: 12px; margin-top: 8px;'>
+    <p style='text-align: center; color: #475569; font-size: 12px; margin-top: 8px;'>
         Pipeline Progress: {int(progress * 100)}%
     </p>
     """, unsafe_allow_html=True)

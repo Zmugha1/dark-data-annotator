@@ -11,23 +11,26 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Match main app dark theme
+# Match main app light theme
 st.markdown("""
 <style>
-    .stApp { background-color: #0f172a; }
-    h1, h2, h3 { color: #f8fafc !important; }
-    p, li { color: #94a3b8; }
+    .stApp { background-color: #f1f5f9; }
+    h1, h2, h3 { color: #0f172a !important; }
+    p, li { color: #334155; }
     .feature-block {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid #334155;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 20px;
         margin: 16px 0;
     }
-    .feature-block h3 { color: #00d9c0 !important; margin-top: 0; }
-    code { background: #020617; color: #00d9c0; padding: 2px 6px; border-radius: 4px; }
+    .feature-block h3 { color: #0d9488 !important; margin-top: 0; }
+    code { background: #e2e8f0; color: #0d9488; padding: 2px 6px; border-radius: 4px; }
 </style>
 """, unsafe_allow_html=True)
+
+if st.button("← Back to main app", type="primary", use_container_width=True):
+    st.switch_page("app.py")
 
 st.title("📖 How to use this app")
 st.markdown("""
@@ -171,4 +174,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("Return to the **main app** using the sidebar to run the pipeline.")
+st.markdown("Return to the **main app** using the button below or the sidebar.")
+if st.button("← Back to main app", key="back_bottom", type="primary", use_container_width=True):
+    st.switch_page("app.py")
