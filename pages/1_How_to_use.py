@@ -29,10 +29,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-if st.button("← Back to main app", type="primary", use_container_width=True):
-    st.switch_page("app.py")
-
 st.title("📖 How to use this app")
+st.caption("Use the sidebar to switch back to the main app (Dark Data Annotator).")
 st.markdown("""
 **Dark Data Annotator** is a step-by-step pipeline that turns raw documents into ML-ready data.  
 Use this guide to understand each feature and how to run the pipeline.
@@ -174,6 +172,4 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("Return to the **main app** using the button below or the sidebar.")
-if st.button("← Back to main app", key="back_bottom", type="primary", use_container_width=True):
-    st.switch_page("app.py")
+st.markdown("**Return to the main app:** click **Dark Data Annotator** (or your app name) in the sidebar.")

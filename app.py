@@ -468,21 +468,20 @@ def render_header():
         </p>
         """, unsafe_allow_html=True)
     with col2:
-        st.markdown("<div style='padding-top: 10px;'> </div>", unsafe_allow_html=True)
-        if st.button("📖 How to use this app", type="primary", use_container_width=True):
-            st.switch_page("pages/1_How_to_use.py")
         st.markdown("""
-        <div style='text-align: right; padding-top: 12px;'>
+        <div style='text-align: right; padding-top: 10px;'>
             <span style='background: #ccfbf1; color: #0d9488;
                          padding: 8px 16px; border-radius: 20px; font-size: 12px;
                          font-weight: 600;'>INTERNAL TOOL v1.0</span>
         </div>
+        <p style='color: #475569; font-size: 13px; margin-top: 12px;'>
+            📖 Click <strong>How to use</strong> in the sidebar for the guide.
+        </p>
         """, unsafe_allow_html=True)
 
 def render_sidebar():
     with st.sidebar:
-        if st.button("📖 How to use this app", key="sidebar_howto", use_container_width=True):
-            st.switch_page("pages/1_How_to_use.py")
+        st.markdown("📖 **Guide:** Use **How to use** (above) to open the feature guide.")
         st.markdown("---")
         st.markdown("### 📊 Pipeline Configuration")
         data_type = st.selectbox(
