@@ -475,13 +475,13 @@ def render_header():
                          font-weight: 600;'>INTERNAL TOOL v1.0</span>
         </div>
         <p style='color: #475569; font-size: 13px; margin-top: 12px;'>
-            📖 Click <strong>How to use</strong> in the sidebar for the guide.
+            📖 Open <strong>How to use this app</strong> (expander below) for the guide.
         </p>
         """, unsafe_allow_html=True)
 
 def render_sidebar():
     with st.sidebar:
-        st.markdown("📖 **Guide:** Use **How to use** (above) to open the feature guide.")
+        st.markdown("📖 **Guide:** Open the **How to use this app** expander on the main page.")
         st.markdown("---")
         st.markdown("### 📊 Pipeline Configuration")
         data_type = st.selectbox(
@@ -624,11 +624,39 @@ def render_explanation(step_name):
         with st.expander("📖 Detailed Explanation", expanded=True):
             st.markdown(explanations[step_name])
 
+def render_how_to_use_guide():
+    """Full How to use guide — all content in one place so user can click and see on same page."""
+    st.markdown("**Dark Data Annotator** turns raw documents into ML-ready data in 6 steps. Use this guide to understand each feature.")
+    st.markdown("---")
+    st.markdown("### 🎯 Overview")
+    st.markdown("You go through **6 steps** in order. Click a button after each step to continue. Use **Back** to re-run a step. At the end you get **ML-ready JSON** and a **metrics comparison**.")
+    st.markdown("---")
+    st.markdown("### ⚙️ Sidebar: Pipeline configuration")
+    st.markdown("**Data Type** — Customer Support Tickets (fake tickets with PII) or Product Reviews (fake reviews). Pick one before **Generate Sample Data**.")
+    st.markdown("**Number of Records** — Slider 3–20. Start with 5.")
+    st.markdown("**Toggles:** Anonymization (step 3), Chunking (step 4), Flattening (step 5). Leave all ON for the full pipeline.")
+    st.markdown("---")
+    st.markdown("### 📋 Pipeline steps")
+    st.markdown("**Step 1 — Data Intake:** Click **Generate Sample Data**. Then **Cleanse Data**.")
+    st.markdown("**Step 2 — Cleansing:** Text normalized, timestamps ISO, categories standardized. Then **Anonymize Data** (or Skip if off).")
+    st.markdown("**Step 3 — Anonymization:** PII removed/hashed. Then **Chunk Documents** (or Skip if off).")
+    st.markdown("**Step 4 — Chunking:** Documents split into segments. Then **Flatten for Embedding** (or Continue with Raw JSON if off).")
+    st.markdown("**Step 5 — Flattening:** JSON → natural language (key optimization). Then **Generate Embeddings**.")
+    st.markdown("**Step 6 — Embeddings:** You see final JSON, **Download ML-Ready Dataset**, and metrics (with vs without flattening). **Start New Pipeline** to run again.")
+    st.markdown("---")
+    st.markdown("### 📈 Metrics and download")
+    st.markdown("At the end, compare **WITHOUT Flattening** vs **WITH Flattening** (e.g. +20% precision, +15% token efficiency). Use **Download ML-Ready Dataset (JSON)** to get the file.")
+    st.markdown("---")
+    st.markdown("**Back** (steps 1–5) = go back one step. **Start New Pipeline** (step 6) = clear and start from step 0.")
+
 # ==================== MAIN APP ====================
 
 def main():
     render_header()
     config = render_sidebar()
+    st.markdown("---")
+    with st.expander("📖 **How to use this app** — click here to open the guide", expanded=False):
+        render_how_to_use_guide()
     st.markdown("---")
     progress = st.session_state.pipeline_step / 6
     st.markdown(f"""
