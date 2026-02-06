@@ -1,0 +1,2 @@
+# Dark Data Annotator — dependencies (minimal until specs)
+# Add packages as the agent is specified and built.
